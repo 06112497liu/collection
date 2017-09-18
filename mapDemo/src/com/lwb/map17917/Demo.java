@@ -5,7 +5,7 @@ import java.util.*;
 public class Demo {
 
     public static void main(String[] args) {
-        test01();
+        test02();
     }
 
     /**
@@ -22,6 +22,31 @@ public class Demo {
         List<Person> l = new ArrayList<>(c);
         System.out.println(l.size());
         System.out.println(l);
+    }
+
+    /**
+     * Map的keySet()方法获得键的集合Set
+     * 操作Set，相应的map也会改变，反之亦然。
+     */
+    static void test02() {
+        Person p1 = new Person("zhangsan", 25);
+        Person p2 = new Person("lisi", 17);
+        Person p3 = new Person("wangwu", 25);
+        Person p4 = new Person("zhaoliu", 17);
+        Map<String, Person> map = new HashMap<>();
+        map.put("k1", p1);
+        map.put("k2", p2);
+        map.put("k3", p1);
+        map.put("k4", p2);
+        Set<String> s = map.keySet();
+        System.out.println(map.size());
+        System.out.println(s.size());
+        s.remove("k1"); // 虽然移除的是键集合中的键，但map集合中的元素也被移除了
+        System.out.println(map.size());
+        System.out.println(s.size());
+        map.remove("k2");
+        System.out.println(map.size());
+        System.out.println(s.size());
     }
 }
 
