@@ -5,7 +5,7 @@ import java.util.*;
 public class Demo {
 
     public static void main(String[] args) {
-        test02();
+        test03();
     }
 
     /**
@@ -27,6 +27,7 @@ public class Demo {
     /**
      * Map的keySet()方法获得键的集合Set
      * 操作Set，相应的map也会改变，反之亦然。
+     * entrySet()方法与此类似
      */
     static void test02() {
         Person p1 = new Person("zhangsan", 25);
@@ -47,6 +48,22 @@ public class Demo {
         map.remove("k2");
         System.out.println(map.size());
         System.out.println(s.size());
+    }
+
+    /**
+     * Map的forEach方法
+     */
+    static void test03() {
+        Person p1 = new Person("zhangsan", 25);
+        Person p2 = new Person("lisi", 17);
+        Person p3 = new Person("wangwu", 25);
+        Person p4 = new Person("zhaoliu", 17);
+        Map<String, Person> map = new HashMap<>();
+        map.put("k1", p1);
+        map.put("k2", p2);
+        map.put("k3", p1);
+        map.put("k4", p2);
+        map.forEach((k, v) -> System.out.println(k + " : " + v));
     }
 }
 
