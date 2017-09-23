@@ -1,11 +1,13 @@
 package com.lwb.map17917;
 
+import org.junit.Test;
+
 import java.util.*;
 
 public class Demo {
 
     public static void main(String[] args) {
-        test03();
+        test04();
     }
 
     /**
@@ -64,6 +66,88 @@ public class Demo {
         map.put("k3", p1);
         map.put("k4", p2);
         map.forEach((k, v) -> System.out.println(k + " : " + v));
+    }
+
+    static void test04() {
+        Person p1 = new Person("zhangsan", 25);
+        Person p2 = new Person("lisi", 17);
+        Person p3 = new Person("wangwu", 25);
+        Person p4 = new Person("zhaoliu", 17);
+        Map<String, Person> map = new HashMap<>();
+        map.put("k1", p1);
+        map.put("k2", p2);
+        map.put("k3", p1);
+        map.put("k4", p2);
+        System.out.println(map);
+        map.replaceAll((k, v) -> {
+            return new Person("a", 20);
+        });
+        System.out.println(map);
+    }
+
+    @Test
+    public void test05() {
+        Person p1 = new Person("zhangsan", 25);
+        Person p2 = new Person("lisi", 17);
+        Person p3 = new Person("wangwu", 25);
+        Person p4 = new Person("zhaoliu", 17);
+        Map<String, Person> map = new HashMap<>();
+        map.put("k1", p1);
+        map.put("k2", p2);
+        map.put("k3", p1);
+        map.put("k4", p2);
+        map.put("k5", null);
+        System.out.println(map);
+        // 如果map中键为k5对应的值为null的话，将其值修改为new Person("niubi", 25)
+        map.computeIfAbsent("k5", p -> {
+            System.out.println(p);
+            return new Person("niubi", 25);
+        });
+        System.out.println(map);
+    }
+
+    @Test
+    public void test06() {
+        Person p1 = new Person("zhangsan", 25);
+        Person p2 = new Person("lisi", 17);
+        Person p3 = new Person("wangwu", 25);
+        Person p4 = new Person("zhaoliu", 17);
+        Map<String, Person> map = new HashMap<>();
+        map.put("k1", p1);
+        map.put("k2", p2);
+        map.put("k3", p1);
+        map.put("k4", p2);
+        map.put("k5", null);
+        System.out.println(map);
+        map.computeIfPresent("k1", (k, v) -> {
+            System.out.println(k + "=" + v);
+            int age = v.getAge();
+            if(age == 26) {
+                return new Person("zhangsan", 28);
+            }
+            return null;
+        });
+        System.out.println(map);
+    }
+
+    @Test
+    public void test07() {
+        Person p1 = new Person("zhangsan", 25);
+        Person p2 = new Person("lisi", 17);
+        Person p3 = new Person("wangwu", 25);
+        Person p4 = new Person("zhaoliu", 17);
+        Map<String, Person> map = new HashMap<>();
+        map.put("k1", p1);
+        map.put("k2", p2);
+        map.put("k3", p1);
+        map.put("k4", p2);
+        map.put("k5", null);
+        map.put("k6", null);
+        System.out.println(map);
+        map.compute("k6", (k, v) -> {
+            return null;
+        });
+        System.out.println(map);
     }
 }
 
